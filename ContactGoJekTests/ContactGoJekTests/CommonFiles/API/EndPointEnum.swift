@@ -16,9 +16,9 @@ enum ContactServiceEndPoint {
     var getURL: URL {
         switch self {
         case .getContacts:
-            return URL(string: "\(NetworkManager.shared.baseUrl)contacts.json")!
+            return URL(string: "\(appBaseUrl)contacts.json")!
         case .getSingleContact(let contactId):
-            return URL(string: "\(NetworkManager.shared.baseUrl)contacts/\(contactId).json")!
+            return URL(string: "\(appBaseUrl)contacts/\(contactId).json")!
         }
     }
     

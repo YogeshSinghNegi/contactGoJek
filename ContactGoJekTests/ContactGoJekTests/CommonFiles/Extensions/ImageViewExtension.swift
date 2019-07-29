@@ -8,7 +8,7 @@
 
 import UIKit
 
-//Below Extension will be used to download image from given url and also will help in the cache maintaining.
+//Below Extension will be used to download image in the given size from given url and also will help in the cache maintaining.
 let imageCache = NSCache<NSString,UIImage>()
 extension UIImage {
     

@@ -8,43 +8,43 @@
 
 import Foundation
 
-class NetworkManager: NSObject {
+//MARK:- NetworkManager Protocol to hit a service
+protocol NetworkManagerProtocol {
     
-    private override init() { }
+    func hitService(_ endPoint: ContactServiceEndPoint, _ success: @escaping(Data) -> Void, _ failure: @escaping(Error) -> Void)
+}
+
+//MARK:- NetworkManager class for Api purpose
+class NetworkManager: NetworkManagerProtocol {
     
-    // MARK: Shared Instance
-    static let shared: NetworkManager = NetworkManager()
-    
-    //Base Url
-    let baseUrl = "http://gojek-contacts-app.herokuapp.com/"
-    
-    //Common Method to hit a service
-    public func hitService(_ endPoint: ContactServiceEndPoint) {
+    func hitService(_ endPoint: ContactServiceEndPoint, _ success: @escaping (Data) -> Void, _ failure: @escaping (Error) -> Void) {
         
         //Make Header as common
         let headers = ["Content-Type": "application/json"]
         
         //Make post data from parameters
-        let postData = try? JSONSerialization.data(withJSONObject: endPoint.getParameter, options: [])
         
         //Common Request with respective URL
         let request = NSMutableURLRequest(url: endPoint.getURL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: 100.0)
         request.httpMethod = endPoint.getMethod
+        if endPoint.getMethod.uppercased() == "POST" {
+            let postData = try? JSONSerialization.data(withJSONObject: endPoint.getParameter, options: [])
+            request.httpBody = postData
+        }
         request.allHTTPHeaderFields = headers
-        request.httpBody = postData
+
         
-        let session = URLSession.shared
+        let session = URLSession(configuration: URLSessionConfiguration.default)
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-            if let error = error {
-                print(error.localizedDescription)
-            } else if let httpResponse = response as? HTTPURLResponse {
-                print(httpResponse)
+            if error != nil, let error = error {
+                failure(error)
+            } else if let data = data {
+                success(data)
             }
         })
         
         dataTask.resume()
     }
-    
 }
