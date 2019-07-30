@@ -12,6 +12,7 @@ import UIKit
 class ContactListViewController: UIViewController {
     
     //MARK:- Private Properties
+    private var refreshController = UIRefreshControl()
     
     //MARK:- Public Properties
     var viewModel: ContactListViewModelProtocol?
@@ -26,6 +27,11 @@ class ContactListViewController: UIViewController {
         initialSetup()
         viewModel?.getContactFromApi()
     }
+    
+    @objc func pullToRefreshData() {
+        
+        viewModel?.getContactFromApi()
+    }
 }
 
 //MARK:- Extension for Private Methods
@@ -35,12 +41,24 @@ extension ContactListViewController {
     private func initialSetup() {
         
         setupTableview()
+        setupRefreshController()
     }
     
     //MARK:- Setting up Tableviews
     private func setupTableview() {
         
+        contactListTableView.tintColor = UIColor.black.withAlphaComponent(0.3)
         contactListTableView.registerCell(with: ContactTableViewCell.self)
+    }
+    
+    //MARK:- Setting up RefreshContoller
+    private func setupRefreshController() {
+        
+        refreshController.tintColor = #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 1) //80 227 194
+        refreshController.addTarget(self,
+                                    action: #selector(pullToRefreshData),
+                                    for: UIControl.Event.valueChanged)
+        contactListTableView.refreshControl = refreshController
     }
     
 }
@@ -61,7 +79,7 @@ extension ContactListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        return 40
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -93,11 +111,16 @@ extension ContactListViewController: ContactListDelegate {
     
     func contactsListFetched() {
         DispatchQueue.main.async {
+            self.refreshController.endRefreshing()
             self.contactListTableView.reloadData()
         }
     }
     
     func errorOccured(_ errorMessage: String) {
         print(errorMessage)
+        DispatchQueue.main.async {
+            self.refreshController.endRefreshing()
+            self.contactListTableView.reloadData()
+        }
     }
 }

@@ -25,16 +25,18 @@ class ContactTableViewCell: UITableViewCell {
     func populate(with model: ContactModel) {
         
         userNameLabel.text = model.fullName
+        favImageIcon.image = model.favorite ? #imageLiteral(resourceName: "home_favourite") : UIImage()
+        userPofilePicImage.image = #imageLiteral(resourceName: "placeholder_photo")
         
         // Setting image from url to image view
-        let size = userPofilePicImage.bounds.size
-        DispatchQueue.global().async {
-            if let url = URL(string: model.profilePicUrl) {
-                let image = UIImage.resizedImage(at: url, for: size)
-                DispatchQueue.main.async {
-                    self.userPofilePicImage.image = image
-                }
-            }
-        }
+//        let size = userPofilePicImage.bounds.size
+//        DispatchQueue.global().async {
+//            if let url = URL(string: model.profilePicUrl) {
+//                let image = UIImage.resizedImage(at: url, for: size)
+//                DispatchQueue.main.async {
+//                    self.userPofilePicImage.image = image
+//                }
+//            }
+//        }
     }
 }
