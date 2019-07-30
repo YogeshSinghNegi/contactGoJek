@@ -8,20 +8,25 @@
 
 import UIKit
 
+//MARK:- Contact Listing Cell Class
 class ContactTableViewCell: UITableViewCell {
     
+    //MARK:- @IBOutlet
     @IBOutlet weak var userPofilePicImage: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var favImageIcon: UIImageView!
     
+    //MARK:- Cell View Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
+    //MARK:- Populate method which sets data to the views
     func populate(with model: ContactModel) {
         
         userNameLabel.text = model.fullName
         
+        // Setting image from url to image view
         let size = userPofilePicImage.bounds.size
         DispatchQueue.global().async {
             if let url = URL(string: model.profilePicUrl) {

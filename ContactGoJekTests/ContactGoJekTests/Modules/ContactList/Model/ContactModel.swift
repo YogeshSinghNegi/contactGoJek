@@ -10,15 +10,15 @@ import Foundation
 
 struct ContactModel: Codable {
     
-    var contactId: Int = 0
-    var firstName: String = ""
-    var lastName: String = ""
-    var profilePicUrl: String = ""
-    var favorite: Bool = false
-    var contactInfoUrl: String = ""
+    let contactId: Int
+    let firstName: String
+    let lastName: String
+    let profilePicUrl: String
+    let favorite: Bool
+    let contactInfoUrl: String
     
+    //Getting complete name from first name and last name
     var fullName: String {
-        
         var completeName = ""
         if !firstName.isEmpty {
             completeName = firstName

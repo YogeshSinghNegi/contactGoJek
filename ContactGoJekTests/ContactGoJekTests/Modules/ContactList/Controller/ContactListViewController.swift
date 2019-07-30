@@ -11,6 +11,8 @@ import UIKit
 //MARK:- Contact List ViewController Class
 class ContactListViewController: UIViewController {
     
+    //MARK:- Private Properties
+    
     //MARK:- Public Properties
     var viewModel: ContactListViewModelProtocol?
     
@@ -22,7 +24,7 @@ class ContactListViewController: UIViewController {
         super.viewDidLoad()
         
         initialSetup()
-        self.viewModel?.getContactFromApi()
+        viewModel?.getContactFromApi()
     }
 }
 
@@ -38,8 +40,6 @@ extension ContactListViewController {
     //MARK:- Setting up Tableviews
     private func setupTableview() {
         
-        contactListTableView.delegate = self
-        contactListTableView.dataSource = self
         contactListTableView.registerCell(with: ContactTableViewCell.self)
     }
     
@@ -49,16 +49,15 @@ extension ContactListViewController {
 extension ContactListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return self.viewModel?.contactList.count ?? 0
+        return viewModel?.contactList.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel?.contactList[section].value.count ?? 0
+        return viewModel?.contactList[section].value.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        return self.viewModel?.contactList[section].key
+        return viewModel?.contactList[section].key
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -68,14 +67,30 @@ extension ContactListViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let listCell = tableView.dequeueCell(with: ContactTableViewCell.self)
-        if let model = self.viewModel?.contactList[indexPath.section].value[indexPath.row] {
+        if let model = viewModel?.contactList[indexPath.section].value[indexPath.row] {
             listCell.populate(with: model)
         }
         return listCell
     }
+    
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return viewModel?.contactList.compactMap { $0.key }
+    }
+    
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        
+        //unicode value of title user tapped
+        guard let value = UnicodeScalar(title)?.value else {return 0}
+        //random value so that it is never picked as no difference will be near to 5000 value if the unicode value is nil
+        let strArray = viewModel?.contactList.compactMap { $0.key } ?? []
+        let differenceArray = strArray.compactMap({abs(Int(value) - Int(UnicodeScalar($0)?.value ?? 5000))})
+        
+        return differenceArray.firstIndex(where: {$0 == differenceArray.min()}) ?? 0
+    }
 }
 
 extension ContactListViewController: ContactListDelegate {
+    
     func contactsListFetched() {
         DispatchQueue.main.async {
             self.contactListTableView.reloadData()
@@ -83,8 +98,6 @@ extension ContactListViewController: ContactListDelegate {
     }
     
     func errorOccured(_ errorMessage: String) {
-        
+        print(errorMessage)
     }
-    
-    
 }

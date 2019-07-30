@@ -60,28 +60,5 @@ class ContactListViewModel: ContactListViewModelProtocol {
             }
         }
         return sectionDic.sorted { $0.0 < $1.0 }
-        /*
-        var sections = Dictionary<String, [ContactModel]>()
-        var contacts = [ContactModel]()
-        var sectionName = ""
-        for contactModel in contact {
-            if sectionName == "" {
-                sectionName =  String(contactModel.firstName.first!)
-            }
-            if String(contactModel.firstName.first!) == sectionName {
-                contacts.append(contactModel)
-            } else {
-                sections[sectionName] = contacts
-                sectionName = String(contactModel.firstName.first!)
-                contacts = [ContactModel]()
-                contacts.append(contactModel)
-            }
-        }
-
-        if sectionName != "" {
-            sections[sectionName] = contacts
-        }
-        return sections
- */
     }
 }
