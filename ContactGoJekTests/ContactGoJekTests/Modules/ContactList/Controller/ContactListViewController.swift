@@ -2,11 +2,11 @@
 //  ContactListViewController.swift
 //  ContactGoJekTests
 //
-//  Created by Aishwarya Rastogi on 28/07/19.
+//  Created by Yogesh Singh Negi on 28/07/19.
 //  Copyright © 2019 Yogesh Singh Negi. All rights reserved.
 //
 
-import ContactsUI
+import UIKit
 
 //MARK:- Contact List ViewController Class
 class ContactListViewController: UIViewController {
@@ -28,6 +28,7 @@ class ContactListViewController: UIViewController {
         viewModel?.getContactFromApi()
     }
     
+    //MARK:- Action Methods
     @objc func pullToRefreshData() {
         viewModel?.getContactFromApi()
     }
@@ -37,7 +38,7 @@ class ContactListViewController: UIViewController {
     }
     
     @objc func groupButtonTapped() {
-        
+        print("Group Is Under Development")
     }
 }
 
@@ -52,8 +53,10 @@ extension ContactListViewController {
         setupRefreshController()
     }
     
+    //MARK:- Setting up navigationView
     private func setupNavigationView() {
         
+        navigationItem.title = "Contact"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                             target: self,
                                                             action: #selector(addButtonTapped))
@@ -66,7 +69,6 @@ extension ContactListViewController {
         groupBtn.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 1)],
                                          for: .normal)
         navigationItem.leftBarButtonItem = groupBtn
-//        navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 1) //80 227 194
     }
     
     //MARK:- Setting up Tableviews
@@ -88,6 +90,13 @@ extension ContactListViewController {
         contactListTableView.refreshControl = refreshController
     }
     
+    //MARK:- Moving to Viewing single contact
+    private func moveToViewController(model: ContactModel) {
+        
+        let viewContactViewContoller = ViewContactViewContoller.instantiate(fromAppStoryboard: .Main)
+        viewContactViewContoller.viewModel = ViewContactViewModel(viewContactDelegate: viewContactViewContoller, contactId: model.contactId)
+        self.navigationController?.pushViewController(viewContactViewContoller, animated: true)
+    }
 }
 
 //MARK:- Extension for TableView Delegate & DataSource
@@ -118,6 +127,14 @@ extension ContactListViewController: UITableViewDelegate, UITableViewDataSource 
         return listCell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if let model = viewModel?.contactList[indexPath.section].value[indexPath.row] {
+            moveToViewController(model: model)
+        }
+    }
+    
+    //Belows delegate methods are for shortcut contact access
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return viewModel?.contactList.compactMap { $0.key }
     }
@@ -134,6 +151,7 @@ extension ContactListViewController: UITableViewDelegate, UITableViewDataSource 
     }
 }
 
+//MARK:- extension for ContactListDelegate
 extension ContactListViewController: ContactListDelegate {
     
     func contactsListFetched() {

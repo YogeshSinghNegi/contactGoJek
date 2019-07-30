@@ -1,5 +1,5 @@
 //
-//  ContactModel.swift
+//  ContactDetailModel.swift
 //  ContactGoJekTests
 //
 //  Created by Yogesh Singh Negi on 28/07/19.
@@ -8,14 +8,17 @@
 
 import Foundation
 
-struct ContactModel: Codable {
+struct ContactDetailModel: Codable {
     
-    let contactId: Int
-    let firstName: String
-    let lastName: String
-    let profilePicUrl: String
+    let createdAt: String
+    let email: String
     let favorite: Bool
-    let contactInfoUrl: String
+    let firstName: String
+    let contactId: Int
+    let lastName: String
+    let phoneNumber: String
+    let profilePicUrl: String
+    let updatedAt: String
     
     //Getting complete name from first name and last name
     var fullName: String {
@@ -36,6 +39,9 @@ struct ContactModel: Codable {
         case lastName = "last_name"
         case profilePicUrl = "profile_pic"
         case favorite = "favorite"
-        case contactInfoUrl = "url"
+        case email = "email"
+        case phoneNumber = "phone_number"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
     }
 }

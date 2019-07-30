@@ -2,7 +2,7 @@
 //  ContactListViewModel.swift
 //  ContactGoJekTests
 //
-//  Created by Aishwarya Rastogi on 28/07/19.
+//  Created by Yogesh Singh Negi on 28/07/19.
 //  Copyright © 2019 Yogesh Singh Negi. All rights reserved.
 //
 
@@ -27,12 +27,14 @@ class ContactListViewModel: ContactListViewModelProtocol {
     let networkManager: NetworkManagerProtocol
     
     init(contactListDelegate: ContactListDelegate) {
-        delegate = contactListDelegate
-        contactList = [(key: String, value: [ContactModel])]()
-        networkManager = NetworkManager()
+        
+        self.delegate = contactListDelegate
+        self.contactList = [(key: String, value: [ContactModel])]()
+        self.networkManager = NetworkManager()
     }
     
     func getContactFromApi() {
+        
         networkManager.hitService(.getContacts, { response in
             let contactList = try? JSONDecoder().decode([ContactModel].self, from: response)
             if let contacts = contactList {

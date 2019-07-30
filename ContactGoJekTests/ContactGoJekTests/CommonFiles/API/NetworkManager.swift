@@ -22,20 +22,19 @@ class NetworkManager: NetworkManagerProtocol {
         //Make Header as common
         let headers = ["Content-Type": "application/json"]
         
-        //Make post data from parameters
-        
         //Common Request with respective URL
         let request = NSMutableURLRequest(url: endPoint.getURL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 100.0)
+                                          timeoutInterval: 10.0)
         request.httpMethod = endPoint.getMethod
+        
+        //Make post data from parameters for Only POST
         if endPoint.getMethod.uppercased() == "POST" {
             let postData = try? JSONSerialization.data(withJSONObject: endPoint.getParameter, options: [])
             request.httpBody = postData
         }
         request.allHTTPHeaderFields = headers
 
-        
         let session = URLSession(configuration: URLSessionConfiguration.default)
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             if error != nil, let error = error {
@@ -44,7 +43,6 @@ class NetworkManager: NetworkManagerProtocol {
                 success(data)
             }
         })
-        
         dataTask.resume()
     }
 }
