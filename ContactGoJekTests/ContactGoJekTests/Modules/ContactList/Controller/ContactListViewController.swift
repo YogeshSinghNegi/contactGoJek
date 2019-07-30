@@ -6,7 +6,7 @@
 //  Copyright © 2019 Yogesh Singh Negi. All rights reserved.
 //
 
-import UIKit
+import ContactsUI
 
 //MARK:- Contact List ViewController Class
 class ContactListViewController: UIViewController {
@@ -29,8 +29,15 @@ class ContactListViewController: UIViewController {
     }
     
     @objc func pullToRefreshData() {
-        
         viewModel?.getContactFromApi()
+    }
+    
+    @objc func addButtonTapped() {
+        
+    }
+    
+    @objc func groupButtonTapped() {
+        
     }
 }
 
@@ -40,13 +47,33 @@ extension ContactListViewController {
     //MARK:- Setting up initial views
     private func initialSetup() {
         
+        setupNavigationView()
         setupTableview()
         setupRefreshController()
+    }
+    
+    private func setupNavigationView() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                                            target: self,
+                                                            action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 1) //80 227 194
+        
+        let groupBtn = UIBarButtonItem(title: "Group",
+                                       style: .plain,
+                                       target: self,
+                                       action: #selector(self.groupButtonTapped))
+        groupBtn.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 1)],
+                                         for: .normal)
+        navigationItem.leftBarButtonItem = groupBtn
+//        navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 1) //80 227 194
     }
     
     //MARK:- Setting up Tableviews
     private func setupTableview() {
         
+        contactListTableView.delegate = self
+        contactListTableView.dataSource = self
         contactListTableView.tintColor = UIColor.black.withAlphaComponent(0.3)
         contactListTableView.registerCell(with: ContactTableViewCell.self)
     }

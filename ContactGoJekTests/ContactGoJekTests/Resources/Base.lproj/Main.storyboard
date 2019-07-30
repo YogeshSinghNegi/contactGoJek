@@ -37,14 +37,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Contact" id="iNb-5F-rVQ">
-                        <barButtonItem key="leftBarButtonItem" title="Groups" id="spN-Xn-xw4">
-                            <color key="tintColor" red="0.31372549020000001" green="0.89019607840000003" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="1ti-Jt-eiX">
-                            <color key="tintColor" red="0.31372549019607843" green="0.8901960784313725" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Contact" id="iNb-5F-rVQ"/>
                     <connections>
                         <outlet property="contactListTableView" destination="Hm0-3f-mqQ" id="ktr-2B-Gg5"/>
                     </connections>
@@ -70,49 +63,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZKc-eu-nQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="100.00000000000001" y="-664.4021739130435"/>
-        </scene>
-        <!--Contact-->
-        <scene sceneID="WSB-bU-40t">
-            <objects>
-                <viewController storyboardIdentifier="ContactListViewController" id="cmw-cV-1In" customClass="ContactListViewController" customModule="ContactGoJekTests" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="dHp-4a-e5h">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="K8b-5c-qHf">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="separatorColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="cmw-cV-1In" id="jkk-vq-Xe7"/>
-                                    <outlet property="delegate" destination="cmw-cV-1In" id="8mq-dR-6cD"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="K8b-5c-qHf" secondAttribute="bottom" id="I1g-PT-VQD"/>
-                            <constraint firstItem="K8b-5c-qHf" firstAttribute="leading" secondItem="TF0-ho-AeO" secondAttribute="leading" id="Nsh-of-D2p"/>
-                            <constraint firstItem="TF0-ho-AeO" firstAttribute="trailing" secondItem="K8b-5c-qHf" secondAttribute="trailing" id="P7V-Cj-8TK"/>
-                            <constraint firstItem="K8b-5c-qHf" firstAttribute="top" secondItem="TF0-ho-AeO" secondAttribute="top" id="fcU-Xy-y7S"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="TF0-ho-AeO"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Contact" id="RNM-qb-Dy9">
-                        <barButtonItem key="leftBarButtonItem" title="Groups" id="qvK-8F-2Mr">
-                            <color key="tintColor" red="0.31372549020000001" green="0.89019607840000003" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ibd-aK-23F">
-                            <color key="tintColor" red="0.31372549020000001" green="0.89019607840000003" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="contactListTableView" destination="K8b-5c-qHf" id="JNW-yk-gxc"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="t2s-SU-aZE" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1796" y="-664"/>
         </scene>
     </scenes>
 </document>
