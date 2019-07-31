@@ -29,7 +29,8 @@ class NetworkManager: NetworkManagerProtocol {
         request.httpMethod = endPoint.getMethod
         
         //Make post data from parameters for Only POST
-        if endPoint.getMethod.uppercased() == "POST" {
+        if endPoint.getMethod.uppercased() == "POST" ||
+            endPoint.getMethod.uppercased() == "PUT" {
             let postData = try? JSONSerialization.data(withJSONObject: endPoint.getParameter, options: [])
             request.httpBody = postData
         }

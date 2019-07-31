@@ -8,9 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		84EA090622F1552A00136AE4 /* UIVewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EA090522F1552A00136AE4 /* UIVewExtension.swift */; };
+		E82F7FA322F200D000DF287D /* DeleteContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82F7FA122F200D000DF287D /* DeleteContactCell.swift */; };
+		E82F7FA422F200D000DF287D /* DeleteContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E82F7FA222F200D000DF287D /* DeleteContactCell.xib */; };
+		E82F7FA622F2069300DF287D /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82F7FA522F2069300DF287D /* UIImageViewExtension.swift */; };
+		E82F7FA822F2080F00DF287D /* URLExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82F7FA722F2080F00DF287D /* URLExtention.swift */; };
+		E82F7FB022F20E5E00DF287D /* EditContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82F7FAB22F20E5E00DF287D /* EditContactViewModel.swift */; };
+		E82F7FB122F20E5E00DF287D /* EditContactViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82F7FAD22F20E5E00DF287D /* EditContactViewContoller.swift */; };
 		E88F20A122F0DBEA008225A5 /* ContactViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88F209F22F0DBEA008225A5 /* ContactViewHeader.swift */; };
 		E88F20A222F0DBEA008225A5 /* ContactViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = E88F20A022F0DBEA008225A5 /* ContactViewHeader.xib */; };
-		E88F20A422F0E6D4008225A5 /* VerticalGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88F20A322F0E6D4008225A5 /* VerticalGradient.swift */; };
 		E8A0980922ECC3730099D5DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A0980822ECC3730099D5DD /* AppDelegate.swift */; };
 		E8A0980E22ECC3730099D5DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8A0980C22ECC3730099D5DD /* Main.storyboard */; };
 		E8A0981022ECC3740099D5DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8A0980F22ECC3740099D5DD /* Assets.xcassets */; };
@@ -24,7 +29,6 @@
 		E8BDFB5D22F0BFA5005D5B5E /* GetConactDataCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8BDFB5B22F0BFA5005D5B5E /* GetConactDataCellTableViewCell.xib */; };
 		E8D5999322ED94D4006E9B28 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D5999222ED94D4006E9B28 /* NetworkManager.swift */; };
 		E8D5999522ED9685006E9B28 /* EndPointEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D5999422ED9685006E9B28 /* EndPointEnum.swift */; };
-		E8D5999722EDA13D006E9B28 /* ImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D5999622EDA13D006E9B28 /* ImageViewExtension.swift */; };
 		E8D599AB22EE1A16006E9B28 /* ContactListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D599AA22EE1A16006E9B28 /* ContactListViewModel.swift */; };
 		E8D599AD22EE1A25006E9B28 /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D599AC22EE1A25006E9B28 /* ContactModel.swift */; };
 		E8D599B322EE1A6D006E9B28 /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D599B222EE1A6D006E9B28 /* ContactListViewController.swift */; };
@@ -56,9 +60,14 @@
 
 /* Begin PBXFileReference section */
 		84EA090522F1552A00136AE4 /* UIVewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIVewExtension.swift; sourceTree = "<group>"; };
+		E82F7FA122F200D000DF287D /* DeleteContactCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteContactCell.swift; sourceTree = "<group>"; };
+		E82F7FA222F200D000DF287D /* DeleteContactCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeleteContactCell.xib; sourceTree = "<group>"; };
+		E82F7FA522F2069300DF287D /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		E82F7FA722F2080F00DF287D /* URLExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtention.swift; sourceTree = "<group>"; };
+		E82F7FAB22F20E5E00DF287D /* EditContactViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditContactViewModel.swift; sourceTree = "<group>"; };
+		E82F7FAD22F20E5E00DF287D /* EditContactViewContoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditContactViewContoller.swift; sourceTree = "<group>"; };
 		E88F209F22F0DBEA008225A5 /* ContactViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewHeader.swift; sourceTree = "<group>"; };
 		E88F20A022F0DBEA008225A5 /* ContactViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactViewHeader.xib; sourceTree = "<group>"; };
-		E88F20A322F0E6D4008225A5 /* VerticalGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalGradient.swift; sourceTree = "<group>"; };
 		E8A0980522ECC3730099D5DD /* ContactGoJekTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactGoJekTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8A0980822ECC3730099D5DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8A0980D22ECC3730099D5DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -78,7 +87,6 @@
 		E8BDFB5B22F0BFA5005D5B5E /* GetConactDataCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GetConactDataCellTableViewCell.xib; sourceTree = "<group>"; };
 		E8D5999222ED94D4006E9B28 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E8D5999422ED9685006E9B28 /* EndPointEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointEnum.swift; sourceTree = "<group>"; };
-		E8D5999622EDA13D006E9B28 /* ImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewExtension.swift; sourceTree = "<group>"; };
 		E8D599AA22EE1A16006E9B28 /* ContactListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewModel.swift; sourceTree = "<group>"; };
 		E8D599AC22EE1A25006E9B28 /* ContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactModel.swift; sourceTree = "<group>"; };
 		E8D599B222EE1A6D006E9B28 /* ContactListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +124,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E82F7FA922F20E5E00DF287D /* EditContact */ = {
+			isa = PBXGroup;
+			children = (
+				E82F7FAA22F20E5E00DF287D /* ViewModel */,
+				E82F7FAC22F20E5E00DF287D /* Controller */,
+				E82F7FAE22F20E5E00DF287D /* Model */,
+				E82F7FAF22F20E5E00DF287D /* View */,
+			);
+			path = EditContact;
+			sourceTree = "<group>";
+		};
+		E82F7FAA22F20E5E00DF287D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E82F7FAB22F20E5E00DF287D /* EditContactViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E82F7FAC22F20E5E00DF287D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E82F7FAD22F20E5E00DF287D /* EditContactViewContoller.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E82F7FAE22F20E5E00DF287D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E82F7FAF22F20E5E00DF287D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		E8A097FC22ECC3730099D5DD = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +239,8 @@
 				E8BDFB5B22F0BFA5005D5B5E /* GetConactDataCellTableViewCell.xib */,
 				E88F209F22F0DBEA008225A5 /* ContactViewHeader.swift */,
 				E88F20A022F0DBEA008225A5 /* ContactViewHeader.xib */,
+				E82F7FA122F200D000DF287D /* DeleteContactCell.swift */,
+				E82F7FA222F200D000DF287D /* DeleteContactCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -234,10 +285,10 @@
 		E8D5999F22EE1553006E9B28 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				E8D5999622EDA13D006E9B28 /* ImageViewExtension.swift */,
 				84EA090522F1552A00136AE4 /* UIVewExtension.swift */,
-				E88F20A322F0E6D4008225A5 /* VerticalGradient.swift */,
+				E82F7FA522F2069300DF287D /* UIImageViewExtension.swift */,
 				E8D599BF22EF5F50006E9B28 /* UIViewControllerExtension.swift */,
+				E82F7FA722F2080F00DF287D /* URLExtention.swift */,
 				E8D599B922EE2069006E9B28 /* NSObject.swift */,
 				E8D599BB22EF5E25006E9B28 /* UITableViewExtension.swift */,
 				E8D599BD22EF5EDA006E9B28 /* AppStoryboard.swift */,
@@ -260,6 +311,7 @@
 			children = (
 				E8D599A322EE196F006E9B28 /* ContactList */,
 				E8BDFB4F22F09851005D5B5E /* ViewContact */,
+				E82F7FA922F20E5E00DF287D /* EditContact */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -416,6 +468,7 @@
 				E8A0981322ECC3740099D5DD /* LaunchScreen.storyboard in Resources */,
 				E88F20A222F0DBEA008225A5 /* ContactViewHeader.xib in Resources */,
 				E8A0981022ECC3740099D5DD /* Assets.xcassets in Resources */,
+				E82F7FA422F200D000DF287D /* DeleteContactCell.xib in Resources */,
 				E8A0980E22ECC3730099D5DD /* Main.storyboard in Resources */,
 				E8BDFB5D22F0BFA5005D5B5E /* GetConactDataCellTableViewCell.xib in Resources */,
 			);
@@ -445,18 +498,21 @@
 				E8BDFB5722F0A006005D5B5E /* ViewContactViewModel.swift in Sources */,
 				E8D5999322ED94D4006E9B28 /* NetworkManager.swift in Sources */,
 				E8D599BC22EF5E25006E9B28 /* UITableViewExtension.swift in Sources */,
+				E82F7FB022F20E5E00DF287D /* EditContactViewModel.swift in Sources */,
 				E8BDFB5922F0A939005D5B5E /* ContactDetailModel.swift in Sources */,
 				E8D599B322EE1A6D006E9B28 /* ContactListViewController.swift in Sources */,
 				E8BDFB5C22F0BFA5005D5B5E /* GetConactDataCellTableViewCell.swift in Sources */,
-				E8D5999722EDA13D006E9B28 /* ImageViewExtension.swift in Sources */,
+				E82F7FB122F20E5E00DF287D /* EditContactViewContoller.swift in Sources */,
 				E8D599BA22EE2069006E9B28 /* NSObject.swift in Sources */,
 				E88F20A122F0DBEA008225A5 /* ContactViewHeader.swift in Sources */,
 				E8D599AB22EE1A16006E9B28 /* ContactListViewModel.swift in Sources */,
 				E8D599B722EE1FB7006E9B28 /* ContactTableViewCell.swift in Sources */,
-				E88F20A422F0E6D4008225A5 /* VerticalGradient.swift in Sources */,
+				E82F7FA622F2069300DF287D /* UIImageViewExtension.swift in Sources */,
+				E82F7FA322F200D000DF287D /* DeleteContactCell.swift in Sources */,
 				84EA090622F1552A00136AE4 /* UIVewExtension.swift in Sources */,
 				E8A0980922ECC3730099D5DD /* AppDelegate.swift in Sources */,
 				E8D599C422EF6384006E9B28 /* AppConstant.swift in Sources */,
+				E82F7FA822F2080F00DF287D /* URLExtention.swift in Sources */,
 				E8BDFB5522F098BE005D5B5E /* ViewContactViewContoller.swift in Sources */,
 				E8D599C022EF5F50006E9B28 /* UIViewControllerExtension.swift in Sources */,
 				E8D599AD22EE1A25006E9B28 /* ContactModel.swift in Sources */,

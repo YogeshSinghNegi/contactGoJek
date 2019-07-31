@@ -11,6 +11,7 @@ import Foundation
 enum ContactServiceEndPoint {
     
     case getContacts
+    case updateContact(contact: ContactDetailModel)
     case getSingleContact(Int)
     
     var getURL: URL {
@@ -19,6 +20,8 @@ enum ContactServiceEndPoint {
             return URL(string: "\(appBaseUrl)contacts.json")!
         case .getSingleContact(let contactId):
             return URL(string: "\(appBaseUrl)contacts/\(contactId).json")!
+        case .updateContact(let contact):
+            return URL(string: "\(appBaseUrl)contacts/\(contact.contactId).json")!
         }
     }
     
@@ -26,6 +29,18 @@ enum ContactServiceEndPoint {
         switch self {
         case .getContacts, .getSingleContact:
             return [:]
+        case .updateContact(let contact):
+            var dict = Dictionary<String, AnyObject>()
+            dict["first_name"] = contact.firstName as AnyObject
+            dict["last_name"] = contact.lastName as AnyObject
+            dict["email"] = contact.email as AnyObject
+            dict["phone_number"] = contact.phoneNumber as AnyObject
+            dict["profile_pic"] = contact.profilePicUrl as AnyObject
+            dict["created_at"] = "\(Data())" as AnyObject
+            dict["updated_at"] = "\(Data())" as AnyObject
+            dict["favorite"] = contact.favorite as AnyObject
+            
+            return dict
         }
     }
     
@@ -33,6 +48,8 @@ enum ContactServiceEndPoint {
         switch self {
         case .getContacts, .getSingleContact:
             return "GET"
+        case .updateContact:
+            return "PUT"
         }
     }
 }

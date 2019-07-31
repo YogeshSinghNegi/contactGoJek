@@ -12,7 +12,7 @@ struct ContactDetailModel: Codable {
     
     let createdAt: String
     let email: String
-    let favorite: Bool
+    var favorite: Bool
     let firstName: String
     let contactId: Int
     let lastName: String

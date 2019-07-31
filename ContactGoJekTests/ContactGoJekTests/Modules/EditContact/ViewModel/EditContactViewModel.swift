@@ -1,5 +1,5 @@
 //
-//  ViewContactViewModel.swift
+//  EditContactViewModel.swift
 //  ContactGoJekTests
 //
 //  Created by Yogesh Singh Negi on 28/07/19.
@@ -8,31 +8,29 @@
 
 import Foundation
 
-protocol ViewContactViewModelProtocol {
+protocol EditContactViewModelProtocol {
     
     var contactId: Int { get set }
-    var contactList: ContactDetailModel? { get set }
+    var contactList: ContactDetailModel? { get }
     func getContactFromApi()
-    func updateContactUsingApi(contact: ContactDetailModel)
 }
 
-protocol ViewContactDelegate: AnyObject {
+protocol EditContactDelegate: AnyObject {
     
     func contactFetched()
-    func contactFavDone()
     func errorOccured(_ errorMessage: String)
 }
 
-class ViewContactViewModel: ViewContactViewModelProtocol {
+class EditContactViewModel: EditContactViewModelProtocol {
     
-    weak var delegate: ViewContactDelegate?
+    weak var delegate: EditContactDelegate?
     var contactList: ContactDetailModel?
     var contactId: Int
     let networkManager: NetworkManagerProtocol
     
-    init(viewContactDelegate: ViewContactDelegate, contactId: Int) {
+    init(EditContactDelegate: EditContactDelegate, contactId: Int) {
         
-        self.delegate = viewContactDelegate
+        self.delegate = EditContactDelegate
         self.contactId = contactId
         self.networkManager = NetworkManager()
     }
@@ -44,21 +42,6 @@ class ViewContactViewModel: ViewContactViewModelProtocol {
             if let contact = fetchedContact {
                 self.contactList = contact
                 self.delegate?.contactFetched()
-            } else {
-                self.delegate?.errorOccured("Error")
-            }
-        }) { error in
-            self.delegate?.errorOccured("Error")
-        }
-    }
-    
-    func updateContactUsingApi(contact: ContactDetailModel) {
-        
-        networkManager.hitService(.updateContact(contact: contact), { response in
-            let contactList = try? JSONDecoder().decode(ContactDetailModel.self, from: response)
-            if let contact = contactList {
-                self.contactList = contact
-                self.delegate?.contactFavDone()
             } else {
                 self.delegate?.errorOccured("Error")
             }

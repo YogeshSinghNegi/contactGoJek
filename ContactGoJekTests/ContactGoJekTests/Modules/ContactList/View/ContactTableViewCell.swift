@@ -31,16 +31,6 @@ class ContactTableViewCell: UITableViewCell {
         
         userNameLabel.text = model.fullName
         favImageIcon.image = model.favorite ? #imageLiteral(resourceName: "home_favourite") : UIImage()
-        
-        // Setting image from url to image view
-        let size = userPofilePicImage.bounds.size
-        DispatchQueue.global().async {
-            if let url = URL(string: model.profilePicUrl) {
-                let image = UIImage.resizedImage(at: url, for: size)
-                DispatchQueue.main.async {
-                    self.userPofilePicImage.image = image == nil ? #imageLiteral(resourceName: "placeholder_photo") : image
-                }
-            }
-        }
+        userPofilePicImage.loadImageUsingCache(withUrl: model.profilePicUrl, placholder: #imageLiteral(resourceName: "placeholder_photo"))
     }
 }

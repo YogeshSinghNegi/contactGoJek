@@ -1,5 +1,5 @@
 //
-//  ViewContactViewContoller.swift
+//  EditContactViewContoller.swift
 //  ContactGoJekTests
 //
 //  Created by Yogesh Singh Negi on 30/07/19.
@@ -9,7 +9,7 @@
 import UIKit
 
 //MARK:- Contact List ViewController Class
-class ViewContactViewContoller: UIViewController {
+class EditContactViewContoller: UIViewController {
     
     //MARK:- Private Properties
     private var refreshController = UIRefreshControl()
@@ -32,16 +32,17 @@ class ViewContactViewContoller: UIViewController {
         viewModel?.getContactFromApi()
     }
     
-    @objc func editButtonTapped() {
-        let editScene = EditContactViewContoller.instantiate(fromAppStoryboard: .Main)
-        editScene.modalPresentationStyle = .popover
-        let navContoller = UINavigationController(rootViewController: editScene)
-        self.present(navContoller, animated: true, completion: nil)
+    @objc func cancelButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func saveButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
 //MARK:- Extension for Private Methods
-extension ViewContactViewContoller {
+extension EditContactViewContoller {
     
     //MARK:- Setting up initial views
     private func initialSetup() {
@@ -53,13 +54,24 @@ extension ViewContactViewContoller {
     
     private func setupNavigationView() {
         
+        //To make navigation bar clear
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        
         navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 1)
         navigationItem.title = ""
         
+        //Adding left cancel bar button
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel,
+                                                           target: self,
+                                                           action: #selector(cancelButtonTapped))
+        navigationItem.leftBarButtonItem?.tintColor = #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 1) //80 227 194
+        
         //Adding right edit bar button
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit,
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
                                                             target: self,
-                                                            action: #selector(editButtonTapped))
+                                                            action: #selector(saveButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 1) //80 227 194
     }
     
@@ -92,30 +104,16 @@ extension ViewContactViewContoller {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
-    private func openMail() {
+    func openMail() {
         if let model = viewModel?.contactList,
             let emailURL = URL(string: "mailto:\(model.email)"), UIApplication.shared.canOpenURL(emailURL) {
             UIApplication.shared.open(emailURL, options: [:], completionHandler: nil)
         }
     }
-    
-    private func makePhoneCall() {
-        if let model = viewModel?.contactList,
-            let url = URL(string: "TEL://\(model.phoneNumber)") {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        }
-    }
-    
-    private func hitFavUnFav() {
-        guard let model = viewModel?.contactList else { return }
-        var newModel = model
-        newModel.favorite.toggle()
-        viewModel?.updateContactUsingApi(contact: newModel)
-    }
 }
 
 //MARK:- Extension for TableView Delegate & DataSource
-extension ViewContactViewContoller: UITableViewDelegate, UITableViewDataSource {
+extension EditContactViewContoller: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -131,21 +129,17 @@ extension ViewContactViewContoller: UITableViewDelegate, UITableViewDataSource {
             let header = tableView.dequeueCell(with: ContactViewHeader.self)
             if let model = viewModel?.contactList {
                 header.populateViews(model: model)
-                header.messageActionTaken = { [weak self] in
-                    guard let _self = self else { return }
-                    _self.openMessage()
+                header.messageActionTaken = {
+                    
                 }
-                header.callActionTaken = { [weak self] in
-                    guard let _self = self else { return }
-                    _self.makePhoneCall()
+                header.callActionTaken = {
+                    
                 }
-                header.emailActionTaken = { [weak self] in
-                    guard let _self = self else { return }
-                    _self.openMail()
+                header.emailActionTaken = {
+                    
                 }
-                header.favUnfavActionTaken = { [weak self] in
-                    guard let _self = self else { return }
-                    _self.hitFavUnFav()
+                header.favUnfavActionTaken = {
+                    
                 }
             }
             return header
@@ -180,13 +174,7 @@ extension ViewContactViewContoller: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension ViewContactViewContoller: ViewContactDelegate {
-    
-    func contactFavDone() {
-        DispatchQueue.main.async {
-            self.contactListTableView.reloadData()
-        }
-    }
+extension EditContactViewContoller: EditContactDelegate {
     
     func contactFetched() {
         DispatchQueue.main.async {

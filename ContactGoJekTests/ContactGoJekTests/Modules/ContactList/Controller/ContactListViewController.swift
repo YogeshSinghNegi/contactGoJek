@@ -55,13 +55,22 @@ extension ContactListViewController {
     
     //MARK:- Setting up navigationView
     private func setupNavigationView() {
+    
+        //To make navigation bar clear
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
         
+        //Adding title to navigation
         navigationItem.title = "Contact"
+        
+        //Adding right add bar button
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                             target: self,
                                                             action: #selector(addButtonTapped))
         navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 1) //80 227 194
         
+        //Adding left group bar button
         let groupBtn = UIBarButtonItem(title: "Group",
                                        style: .plain,
                                        target: self,
@@ -74,6 +83,7 @@ extension ContactListViewController {
     //MARK:- Setting up Tableviews
     private func setupTableview() {
         
+        contactListTableView.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9764705882, blue: 0.9764705882, alpha: 1)
         contactListTableView.delegate = self
         contactListTableView.dataSource = self
         contactListTableView.tintColor = UIColor.black.withAlphaComponent(0.3)
