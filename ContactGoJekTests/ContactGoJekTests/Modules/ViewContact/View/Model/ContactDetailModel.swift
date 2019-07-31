@@ -11,12 +11,12 @@ import Foundation
 struct ContactDetailModel: Codable {
     
     let createdAt: String
-    let email: String
+    var email: String
     var favorite: Bool
-    let firstName: String
+    var firstName: String
     let contactId: Int
-    let lastName: String
-    let phoneNumber: String
+    var lastName: String
+    var phoneNumber: String
     let profilePicUrl: String
     let updatedAt: String
     
@@ -30,6 +30,18 @@ struct ContactDetailModel: Codable {
             completeName += " \(lastName)"
         }
         return completeName
+    }
+    
+    init() {
+        createdAt = ""
+        email = ""
+        favorite = false
+        firstName = ""
+        contactId = 0
+        lastName = ""
+        phoneNumber = ""
+        profilePicUrl = ""
+        updatedAt = ""
     }
     
     enum CodingKeys: String, CodingKey {

@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol ViewContactVCDelegate: AnyObject {
+    func contactUpdated(contact: ContactDetailModel)
+    func newContactAdded()
+    func deleteContact()
+}
+
 //MARK:- Contact List ViewController Class
 class ViewContactViewContoller: UIViewController {
     
@@ -16,6 +22,7 @@ class ViewContactViewContoller: UIViewController {
     
     //MARK:- Public Properties
     var viewModel: ViewContactViewModelProtocol?
+    weak var delegate: ViewContactVCDelegate?
     
     //MARK:- @IBOutlets
     @IBOutlet weak var contactListTableView: UITableView!
@@ -33,8 +40,12 @@ class ViewContactViewContoller: UIViewController {
     }
     
     @objc func editButtonTapped() {
+        
+        guard let model = viewModel?.contactList else { return }
         let editScene = EditContactViewContoller.instantiate(fromAppStoryboard: .Main)
-        editScene.modalPresentationStyle = .popover
+        editScene.viewModel = EditContactViewModel(EditContactDelegate: editScene, contactList: model)
+        editScene.delegate = self
+        editScene.pageState = .edit
         let navContoller = UINavigationController(rootViewController: editScene)
         self.present(navContoller, animated: true, completion: nil)
     }
@@ -118,7 +129,7 @@ extension ViewContactViewContoller {
 extension ViewContactViewContoller: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return viewModel?.contactList == nil ? 0 : 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -164,11 +175,17 @@ extension ViewContactViewContoller: UITableViewDelegate, UITableViewDataSource {
             return listCell
         } else {
             let deleteCell = tableView.dequeueCell(with: DeleteContactCell.self)
-            deleteCell.deleteActionTaken = {
-                
+            deleteCell.deleteActionTaken = { [weak self] in
+                guard let _self = self else { return }
+                _self.viewModel?.deleteContact()
             }
             return deleteCell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.section == 1 else { return }
+        viewModel?.deleteContact()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -186,6 +203,9 @@ extension ViewContactViewContoller: ViewContactDelegate {
         DispatchQueue.main.async {
             self.contactListTableView.reloadData()
         }
+        if let model = viewModel?.contactList {
+            self.delegate?.contactUpdated(contact: model)
+        }
     }
     
     func contactFetched() {
@@ -193,12 +213,37 @@ extension ViewContactViewContoller: ViewContactDelegate {
             self.refreshController.endRefreshing()
             self.contactListTableView.reloadData()
         }
+        if let model = viewModel?.contactList {
+            self.delegate?.contactUpdated(contact: model)
+        }
     }
     
     func errorOccured(_ errorMessage: String) {
         print(errorMessage)
         DispatchQueue.main.async {
             self.refreshController.endRefreshing()
+            self.contactListTableView.reloadData()
+        }
+    }
+}
+
+//MARK:- extension for ViewContactVCDelegate
+extension ViewContactViewContoller: ViewContactVCDelegate {
+    
+    func deleteContact() {
+        delegate?.deleteContact()
+    }
+    
+    func newContactAdded() {
+        
+    }
+    
+    func contactUpdated(contact: ContactDetailModel) {
+        viewModel?.contactList = contact
+        if let model = viewModel?.contactList {
+            self.delegate?.contactUpdated(contact: model)
+        }
+        DispatchQueue.main.async {
             self.contactListTableView.reloadData()
         }
     }

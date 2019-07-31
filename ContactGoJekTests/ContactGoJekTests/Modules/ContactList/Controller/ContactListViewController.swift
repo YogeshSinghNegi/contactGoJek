@@ -35,6 +35,12 @@ class ContactListViewController: UIViewController {
     
     @objc func addButtonTapped() {
         
+        let editScene = EditContactViewContoller.instantiate(fromAppStoryboard: .Main)
+        editScene.viewModel = EditContactViewModel(EditContactDelegate: editScene, contactList: ContactDetailModel())
+        editScene.delegate = self
+        editScene.pageState = .add
+        let navContoller = UINavigationController(rootViewController: editScene)
+        self.present(navContoller, animated: true, completion: nil)
     }
     
     @objc func groupButtonTapped() {
@@ -105,6 +111,7 @@ extension ContactListViewController {
         
         let viewContactViewContoller = ViewContactViewContoller.instantiate(fromAppStoryboard: .Main)
         viewContactViewContoller.viewModel = ViewContactViewModel(viewContactDelegate: viewContactViewContoller, contactId: model.contactId)
+        viewContactViewContoller.delegate = self
         self.navigationController?.pushViewController(viewContactViewContoller, animated: true)
     }
 }
@@ -175,6 +182,38 @@ extension ContactListViewController: ContactListDelegate {
         print(errorMessage)
         DispatchQueue.main.async {
             self.refreshController.endRefreshing()
+            self.contactListTableView.reloadData()
+        }
+    }
+}
+
+//MARK:- extension for ViewContactVCDelegate
+extension ContactListViewController: ViewContactVCDelegate {
+    
+    func deleteContact() {
+        pullToRefreshData()
+    }
+    
+    func newContactAdded() {
+        pullToRefreshData()
+    }
+    
+    func contactUpdated(contact: ContactDetailModel) {
+        
+        guard let contactList = viewModel?.contactList else { return }
+        let finalModel = contactList.compactMap({ keyValueModel -> (key: String, value: [ContactModel]) in
+            var tempObj = keyValueModel
+            tempObj.value = keyValueModel.value.compactMap({ (model) -> ContactModel in
+                var tempModel = model
+                if tempModel.contactId == contact.contactId {
+                    tempModel = tempModel.convertToContactModel(from: contact)
+                }
+                return tempModel
+            })
+            return tempObj
+        })
+        viewModel?.contactList = finalModel
+        DispatchQueue.main.async {
             self.contactListTableView.reloadData()
         }
     }

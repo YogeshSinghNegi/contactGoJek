@@ -36,4 +36,20 @@ extension UIView {
         gradient.colors = [colorTop.cgColor,colorBottom.cgColor]
         self.layer.addSublayer(gradient)
     }
+    
+    var tableViewCell: UITableViewCell? {
+        var subviewClass = self
+        while !(subviewClass is UITableViewCell) {
+            guard let view = subviewClass.superview else { return nil }
+            subviewClass = view
+        }
+        return subviewClass as? UITableViewCell
+    }
+    
+    func tableViewIndexPath(_ tableView: UITableView) -> IndexPath? {
+        if let cell = self.tableViewCell {
+            return tableView.indexPath(for: cell)
+        }
+        return nil
+    }
 }

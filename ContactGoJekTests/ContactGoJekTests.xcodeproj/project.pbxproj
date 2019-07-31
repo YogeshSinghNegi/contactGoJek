@@ -22,6 +22,7 @@
 		E8A0981322ECC3740099D5DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8A0981122ECC3740099D5DD /* LaunchScreen.storyboard */; };
 		E8A0981E22ECC3740099D5DD /* ContactGoJekTestsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A0981D22ECC3740099D5DD /* ContactGoJekTestsTests.swift */; };
 		E8A0982922ECC3740099D5DD /* ContactGoJekTestsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A0982822ECC3740099D5DD /* ContactGoJekTestsUITests.swift */; };
+		E8AA218B22F2321600D44D8A /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AA218A22F2321600D44D8A /* StringExtension.swift */; };
 		E8BDFB5522F098BE005D5B5E /* ViewContactViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BDFB5422F098BE005D5B5E /* ViewContactViewContoller.swift */; };
 		E8BDFB5722F0A006005D5B5E /* ViewContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BDFB5622F0A006005D5B5E /* ViewContactViewModel.swift */; };
 		E8BDFB5922F0A939005D5B5E /* ContactDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BDFB5822F0A939005D5B5E /* ContactDetailModel.swift */; };
@@ -80,6 +81,7 @@
 		E8A0982422ECC3740099D5DD /* ContactGoJekTestsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContactGoJekTestsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8A0982822ECC3740099D5DD /* ContactGoJekTestsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactGoJekTestsUITests.swift; sourceTree = "<group>"; };
 		E8A0982A22ECC3740099D5DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8AA218A22F2321600D44D8A /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		E8BDFB5422F098BE005D5B5E /* ViewContactViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewContactViewContoller.swift; sourceTree = "<group>"; };
 		E8BDFB5622F0A006005D5B5E /* ViewContactViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewContactViewModel.swift; sourceTree = "<group>"; };
 		E8BDFB5822F0A939005D5B5E /* ContactDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailModel.swift; sourceTree = "<group>"; };
@@ -218,7 +220,6 @@
 			children = (
 				E8BDFB5022F09869005D5B5E /* Controller */,
 				E8BDFB5122F09870005D5B5E /* View */,
-				E8BDFB5222F09877005D5B5E /* Model */,
 				E8BDFB5322F0987B005D5B5E /* ViewModel */,
 			);
 			path = ViewContact;
@@ -241,6 +242,7 @@
 				E88F20A022F0DBEA008225A5 /* ContactViewHeader.xib */,
 				E82F7FA122F200D000DF287D /* DeleteContactCell.swift */,
 				E82F7FA222F200D000DF287D /* DeleteContactCell.xib */,
+				E8BDFB5222F09877005D5B5E /* Model */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -288,6 +290,7 @@
 				84EA090522F1552A00136AE4 /* UIVewExtension.swift */,
 				E82F7FA522F2069300DF287D /* UIImageViewExtension.swift */,
 				E8D599BF22EF5F50006E9B28 /* UIViewControllerExtension.swift */,
+				E8AA218A22F2321600D44D8A /* StringExtension.swift */,
 				E82F7FA722F2080F00DF287D /* URLExtention.swift */,
 				E8D599B922EE2069006E9B28 /* NSObject.swift */,
 				E8D599BB22EF5E25006E9B28 /* UITableViewExtension.swift */,
@@ -515,6 +518,7 @@
 				E82F7FA822F2080F00DF287D /* URLExtention.swift in Sources */,
 				E8BDFB5522F098BE005D5B5E /* ViewContactViewContoller.swift in Sources */,
 				E8D599C022EF5F50006E9B28 /* UIViewControllerExtension.swift in Sources */,
+				E8AA218B22F2321600D44D8A /* StringExtension.swift in Sources */,
 				E8D599AD22EE1A25006E9B28 /* ContactModel.swift in Sources */,
 				E8D5999522ED9685006E9B28 /* EndPointEnum.swift in Sources */,
 				E8D599BE22EF5EDA006E9B28 /* AppStoryboard.swift in Sources */,
@@ -695,6 +699,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K844B29CFW;
 				INFOPLIST_FILE = ContactGoJekTests/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -713,6 +718,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K844B29CFW;
 				INFOPLIST_FILE = ContactGoJekTests/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

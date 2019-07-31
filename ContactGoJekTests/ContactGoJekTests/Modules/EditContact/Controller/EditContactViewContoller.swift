@@ -15,7 +15,13 @@ class EditContactViewContoller: UIViewController {
     private var refreshController = UIRefreshControl()
     
     //MARK:- Public Properties
-    var viewModel: ViewContactViewModelProtocol?
+    var viewModel: EditContactViewModelProtocol?
+    weak var delegate: ViewContactVCDelegate?
+    var pageState: ContactPageState = .add
+    
+    enum ContactPageState {
+        case edit, add
+    }
     
     //MARK:- @IBOutlets
     @IBOutlet weak var contactListTableView: UITableView!
@@ -28,16 +34,28 @@ class EditContactViewContoller: UIViewController {
         viewModel?.getContactFromApi()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
+    
     @objc func pullToRefreshData() {
         viewModel?.getContactFromApi()
     }
     
     @objc func cancelButtonTapped() {
-        self.dismiss(animated: true, completion: nil)
+        view.endEditing(true)
+        dismiss(animated: true, completion: nil)
     }
     
     @objc func saveButtonTapped() {
-        self.dismiss(animated: true, completion: nil)
+        view.endEditing(true)
+        
+        if pageState == .add {
+            viewModel?.addContactUsingApi()
+        } else {
+            viewModel?.updateContactUsingApi()
+        }
     }
 }
 
@@ -96,73 +114,36 @@ extension EditContactViewContoller {
                                     for: UIControl.Event.valueChanged)
         contactListTableView.refreshControl = refreshController
     }
-    
-    private func openMessage() {
-        guard let model = viewModel?.contactList,
-            let strURL = "sms:\(model.phoneNumber)&body=".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-            let url = URL(string: strURL) else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    }
-    
-    func openMail() {
-        if let model = viewModel?.contactList,
-            let emailURL = URL(string: "mailto:\(model.email)"), UIApplication.shared.canOpenURL(emailURL) {
-            UIApplication.shared.open(emailURL, options: [:], completionHandler: nil)
-        }
-    }
 }
 
 //MARK:- Extension for TableView Delegate & DataSource
 extension EditContactViewContoller: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return viewModel?.contactList == nil ? 0 : 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 2 : 1
+        return 4
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        if section == 0 {
-            let header = tableView.dequeueCell(with: ContactViewHeader.self)
-            if let model = viewModel?.contactList {
-                header.populateViews(model: model)
-                header.messageActionTaken = {
-                    
-                }
-                header.callActionTaken = {
-                    
-                }
-                header.emailActionTaken = {
-                    
-                }
-                header.favUnfavActionTaken = {
-                    
-                }
-            }
-            return header
-        } else {
-            return nil
+        let header = tableView.dequeueCell(with: ContactViewHeader.self)
+        if let model = viewModel?.contactList {
+            header.populateForEdit(model: model)
         }
+        return header
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == 0 {
-            let listCell = tableView.dequeueCell(with: GetConactDataCellTableViewCell.self)
-            if let model = viewModel?.contactList {
-                listCell.populateForViewContact(model: model, index: indexPath.row)
-            }
-            return listCell
-        } else {
-            let deleteCell = tableView.dequeueCell(with: DeleteContactCell.self)
-            deleteCell.deleteActionTaken = {
-                
-            }
-            return deleteCell
+        let listCell = tableView.dequeueCell(with: GetConactDataCellTableViewCell.self)
+        if let model = viewModel?.contactList {
+            listCell.populateForEditContact(model: model, index: indexPath.row)
+            listCell.enterField.delegate = self
         }
+        return listCell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -170,17 +151,30 @@ extension EditContactViewContoller: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 300 : CGFloat.leastNormalMagnitude
+        return 220
     }
 }
 
 extension EditContactViewContoller: EditContactDelegate {
+    
+    func contactAdded() {
+        delegate?.newContactAdded()
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func contactUpdated() {
+        guard let model = viewModel?.contactList else { return }
+        delegate?.contactUpdated(contact: model)
+        dismiss(animated: true, completion: nil)
+    }
     
     func contactFetched() {
         DispatchQueue.main.async {
             self.refreshController.endRefreshing()
             self.contactListTableView.reloadData()
         }
+        guard let model = viewModel?.contactList else { return }
+        delegate?.contactUpdated(contact: model)
     }
     
     func errorOccured(_ errorMessage: String) {
@@ -189,5 +183,48 @@ extension EditContactViewContoller: EditContactDelegate {
             self.refreshController.endRefreshing()
             self.contactListTableView.reloadData()
         }
+    }
+}
+
+extension EditContactViewContoller: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        guard let indexPath = textField.tableViewIndexPath(contactListTableView) else { return }
+        let text = (textField.text ?? "").byRemovingLeadingTrailingWhiteSpaces
+        
+        guard let model = viewModel?.contactList else { return }
+        var newModel = model
+        switch indexPath.row{
+        case 0 :
+            newModel.firstName = text
+        case 1:
+            newModel.lastName = text
+        case 2:
+            newModel.phoneNumber = text
+        case 3:
+            newModel.email = text
+        default:
+            break
+        }
+        viewModel?.contactList = newModel
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if let indexPath = textField.tableViewIndexPath(contactListTableView){
+            let nextIndex = IndexPath(row: indexPath.row + 1, section: indexPath.section)
+            
+            let cell = contactListTableView.cellForRow(at: indexPath) as? GetConactDataCellTableViewCell
+            let nextCell = contactListTableView.cellForRow(at: nextIndex) as? GetConactDataCellTableViewCell
+            
+            if textField.returnKeyType == .done {
+                cell?.enterField.resignFirstResponder()
+            } else {
+                cell?.enterField.resignFirstResponder()
+                nextCell?.enterField.becomeFirstResponder()
+            }
+        }
+        return true
     }
 }

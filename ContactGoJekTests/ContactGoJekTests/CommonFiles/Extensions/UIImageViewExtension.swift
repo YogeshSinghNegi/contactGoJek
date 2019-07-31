@@ -16,6 +16,7 @@ extension UIImageView {
         
         self.image = placholder
         let url = URL(string: urlString)
+        if url == nil { return }
         if let finalURL = url,
             !finalURL.isValidURL { return }
         

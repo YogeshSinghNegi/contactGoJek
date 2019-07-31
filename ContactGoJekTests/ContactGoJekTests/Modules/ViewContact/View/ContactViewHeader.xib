@@ -116,10 +116,20 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MtN-og-j6V">
+                                <rect key="frame" x="192.5" y="100" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="dbg-VU-KHz"/>
+                                    <constraint firstAttribute="width" constant="40" id="kSg-JR-sZP"/>
+                                </constraints>
+                                <state key="normal" image="camera_button"/>
+                            </button>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="MtN-og-j6V" firstAttribute="bottom" secondItem="bSk-sj-t3A" secondAttribute="bottom" id="3tT-1B-1Ar"/>
                             <constraint firstItem="v4v-mZ-Cqa" firstAttribute="width" secondItem="N3H-aR-NIg" secondAttribute="width" multiplier="0.85" id="AyJ-p9-rb2"/>
                             <constraint firstItem="bSk-sj-t3A" firstAttribute="centerX" secondItem="N3H-aR-NIg" secondAttribute="centerX" id="Lig-gg-1Nx"/>
+                            <constraint firstItem="MtN-og-j6V" firstAttribute="trailing" secondItem="bSk-sj-t3A" secondAttribute="trailing" id="RJj-gW-r2p"/>
                             <constraint firstItem="bSk-sj-t3A" firstAttribute="top" secondItem="N3H-aR-NIg" secondAttribute="top" constant="20" id="SG4-eN-ibO"/>
                             <constraint firstAttribute="bottom" secondItem="v4v-mZ-Cqa" secondAttribute="bottom" constant="11" id="cSx-yn-30c"/>
                             <constraint firstItem="v4v-mZ-Cqa" firstAttribute="centerX" secondItem="N3H-aR-NIg" secondAttribute="centerX" id="d2E-4J-28u"/>
@@ -183,6 +193,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="addPhotoButton" destination="MtN-og-j6V" id="c8C-Ji-u30"/>
                 <outlet property="backGradientView" destination="YYo-np-so6" id="nOV-aN-UYp"/>
                 <outlet property="callIcon" destination="ZH2-wL-xV5" id="mv3-R7-lH2"/>
                 <outlet property="emailIcon" destination="V7O-R8-Che" id="hQD-2l-cDI"/>
@@ -190,12 +201,17 @@
                 <outlet property="messageIcon" destination="SBL-BK-apC" id="kdw-bZ-Eax"/>
                 <outlet property="profilePicImage" destination="bSk-sj-t3A" id="aXE-hJ-XnB"/>
                 <outlet property="userNameLabel" destination="xMD-Yg-zgf" id="g6B-wS-y4c"/>
+                <outletCollection property="actionItemStack" destination="Xas-UZ-fRg" collectionClass="NSMutableArray" id="9aZ-gf-voy"/>
+                <outletCollection property="actionItemStack" destination="Cdg-cZ-20R" collectionClass="NSMutableArray" id="s7L-4h-KRv"/>
+                <outletCollection property="actionItemStack" destination="m2V-e2-ZP8" collectionClass="NSMutableArray" id="Uet-NM-KCG"/>
+                <outletCollection property="actionItemStack" destination="5lG-AY-g8a" collectionClass="NSMutableArray" id="GUN-Um-aZ6"/>
             </connections>
             <point key="canvasLocation" x="155.79710144927537" y="207.25446428571428"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="call_button" width="45" height="44"/>
+        <image name="camera_button" width="41" height="41"/>
         <image name="email_button" width="45" height="44"/>
         <image name="favourite_button" width="44" height="44"/>
         <image name="favourite_button_selected" width="44" height="44"/>

@@ -29,7 +29,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ndy-Tc-l7S">
-                                <rect key="frame" x="118" y="19.5" width="254" height="17"/>
+                                <rect key="frame" x="118" y="5" width="254" height="46"/>
                                 <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -40,6 +40,7 @@
                             <constraint firstItem="Ndy-Tc-l7S" firstAttribute="centerY" secondItem="CNI-4m-sZq" secondAttribute="centerY" id="44P-ge-CAT"/>
                             <constraint firstAttribute="height" constant="56" id="Djz-tj-Vhz"/>
                             <constraint firstItem="Ndy-Tc-l7S" firstAttribute="leading" secondItem="CNI-4m-sZq" secondAttribute="trailing" constant="20" id="UPD-xQ-NXa"/>
+                            <constraint firstItem="Ndy-Tc-l7S" firstAttribute="top" secondItem="qkI-86-SJV" secondAttribute="top" constant="5" id="f18-nc-phX"/>
                             <constraint firstItem="CNI-4m-sZq" firstAttribute="centerY" secondItem="qkI-86-SJV" secondAttribute="centerY" id="mGb-U6-Y4j"/>
                             <constraint firstAttribute="trailing" secondItem="Ndy-Tc-l7S" secondAttribute="trailing" constant="20" id="mP3-Ab-8yY"/>
                             <constraint firstItem="CNI-4m-sZq" firstAttribute="trailing" secondItem="qkI-86-SJV" secondAttribute="centerX" multiplier="0.5" id="uJk-Bg-aDB"/>

@@ -34,7 +34,7 @@ class NetworkManager: NetworkManagerProtocol {
             let postData = try? JSONSerialization.data(withJSONObject: endPoint.getParameter, options: [])
             request.httpBody = postData
         }
-        request.allHTTPHeaderFields = headers
+        request.allHTTPHeaderFields = endPoint.getMethod.uppercased() == "DELETE" ? [:] : headers
 
         let session = URLSession(configuration: URLSessionConfiguration.default)
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in

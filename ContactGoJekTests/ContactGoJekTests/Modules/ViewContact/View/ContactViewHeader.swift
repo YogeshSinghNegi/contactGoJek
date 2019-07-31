@@ -22,6 +22,8 @@ class ContactViewHeader: UITableViewCell {
     @IBOutlet weak var emailIcon: UIImageView!
     @IBOutlet weak var favouriteIcon: UIImageView!
     @IBOutlet weak var backGradientView: UIView!
+    @IBOutlet var actionItemStack: [UIStackView]!
+    @IBOutlet weak var addPhotoButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,6 +36,11 @@ class ContactViewHeader: UITableViewCell {
         super.draw(rect)
         
         backGradientView.addGradient(colorTop: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), colorBottom: #colorLiteral(red: 0.3137254902, green: 0.8901960784, blue: 0.7607843137, alpha: 0.28))
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        contentView.endEditing(true)
     }
     
     @IBAction func messageBtnTapped(_ sender: Any) {
@@ -76,8 +83,19 @@ class ContactViewHeader: UITableViewCell {
     
     func populateViews(model: ContactDetailModel) {
         
+        addPhotoButton.isHidden = true
         favouriteIcon.isHighlighted = model.favorite
         userNameLabel.text = model.fullName
+        profilePicImage.loadImageUsingCache(withUrl: model.profilePicUrl, placholder: #imageLiteral(resourceName: "placeholder_photo"))
+    }
+    
+    func populateForEdit(model: ContactDetailModel) {
+        
+        addPhotoButton.isHidden = false
+        actionItemStack.forEach { (view) in
+            view.isHidden = true
+        }
+        userNameLabel.text = ""
         profilePicImage.loadImageUsingCache(withUrl: model.profilePicUrl, placholder: #imageLiteral(resourceName: "placeholder_photo"))
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 
 protocol ContactListViewModelProtocol {
     
-    var contactList: [(key: String, value: [ContactModel])] { get }
+    var contactList: [(key: String, value: [ContactModel])] { get set }
     func getContactFromApi()
 }
 
