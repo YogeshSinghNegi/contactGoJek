@@ -94,6 +94,9 @@ extension ViewContactViewContoller: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let header = tableView.dequeueCell(with: ContactViewHeader.self)
+        if let model = viewModel?.contactList {
+            header.populateViews(model: model)
+        }
         return header
     }
     
@@ -111,7 +114,7 @@ extension ViewContactViewContoller: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 336
+        return 300
     }
 }
 

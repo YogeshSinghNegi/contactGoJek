@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84EA090622F1552A00136AE4 /* UIVewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EA090522F1552A00136AE4 /* UIVewExtension.swift */; };
 		E88F20A122F0DBEA008225A5 /* ContactViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88F209F22F0DBEA008225A5 /* ContactViewHeader.swift */; };
 		E88F20A222F0DBEA008225A5 /* ContactViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = E88F20A022F0DBEA008225A5 /* ContactViewHeader.xib */; };
 		E88F20A422F0E6D4008225A5 /* VerticalGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88F20A322F0E6D4008225A5 /* VerticalGradient.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84EA090522F1552A00136AE4 /* UIVewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIVewExtension.swift; sourceTree = "<group>"; };
 		E88F209F22F0DBEA008225A5 /* ContactViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewHeader.swift; sourceTree = "<group>"; };
 		E88F20A022F0DBEA008225A5 /* ContactViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactViewHeader.xib; sourceTree = "<group>"; };
 		E88F20A322F0E6D4008225A5 /* VerticalGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalGradient.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				E8D5999622EDA13D006E9B28 /* ImageViewExtension.swift */,
+				84EA090522F1552A00136AE4 /* UIVewExtension.swift */,
 				E88F20A322F0E6D4008225A5 /* VerticalGradient.swift */,
 				E8D599BF22EF5F50006E9B28 /* UIViewControllerExtension.swift */,
 				E8D599B922EE2069006E9B28 /* NSObject.swift */,
@@ -451,6 +454,7 @@
 				E8D599AB22EE1A16006E9B28 /* ContactListViewModel.swift in Sources */,
 				E8D599B722EE1FB7006E9B28 /* ContactTableViewCell.swift in Sources */,
 				E88F20A422F0E6D4008225A5 /* VerticalGradient.swift in Sources */,
+				84EA090622F1552A00136AE4 /* UIVewExtension.swift in Sources */,
 				E8A0980922ECC3730099D5DD /* AppDelegate.swift in Sources */,
 				E8D599C422EF6384006E9B28 /* AppConstant.swift in Sources */,
 				E8BDFB5522F098BE005D5B5E /* ViewContactViewContoller.swift in Sources */,

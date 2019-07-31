@@ -21,6 +21,11 @@ class ContactTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
+    private func initialSetup() {
+        
+        
+    }
+    
     //MARK:- Populate method which sets data to the views
     func populate(with model: ContactModel) {
         
